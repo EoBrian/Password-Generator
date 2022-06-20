@@ -1,4 +1,7 @@
 from random import randint, choice
+import os
+
+
 
 CHARACTERS = {
     'letras': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I','J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
@@ -30,3 +33,19 @@ def generator_pass(number=8):
 
     new_password = ''.join(password)
     return new_password
+
+
+def pathDir():
+    #Pegado diretório padrão do usuário
+    informações = os.environ
+    usuário = informações['USERPROFILE']
+
+    #pasta download
+    return rf'{usuário}\OneDrive\Documentos'
+
+
+def save_password(password=(12345678), email='Anônimo', usuário='Anônimo'):
+    os.chdir(pathDir())
+    with open('password.txt', 'a') as file:
+        file.write(f'email: {email} \nusuário: {usuário} \npassword: {password} \n\n')
+    return file
